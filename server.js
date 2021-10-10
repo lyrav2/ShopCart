@@ -16,7 +16,7 @@ app.use("/users", userController);
 app.use("/products", productController);
 
 app.listen(process.env.PORT,() => {
-    console.log(`Web server is up and running on ${3000}`);
+    console.log(`Web server is up and running on ${process.env.PORT}`);
 
     mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING)
     .then(() => {

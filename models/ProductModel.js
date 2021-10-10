@@ -8,7 +8,8 @@ const productSchema = new Schema({
     },
     price : {
         type: Number,
-        required: true
+        required: true,
+        min: [0, 'Must be greater than 0']
     },
     description : {
         type: String,
@@ -24,7 +25,7 @@ const productSchema = new Schema({
     },
     bestseller : {
         type: Boolean,
-        required: false
+        required: true
     },
     productURL : {
         type: String,

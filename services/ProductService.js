@@ -1,5 +1,6 @@
 const productModel = require("../models/ProductModel.js");
 
+// endpoint to get all products, get all bestseller products, and retrieves specific categories
 exports.getProducts = (req, res) => {
     if (req.query.bestseller) {
         productModel.find()
@@ -48,6 +49,7 @@ exports.getProducts = (req, res) => {
     }
 }
 
+// endpoint to get one product by id
 exports.getProduct = (req, res) => {
     productModel.findById(req.params.id)
     .then((product) => {
@@ -69,10 +71,14 @@ exports.getProduct = (req, res) => {
     })
 }
 
+// endpoint to create product
 exports.createProduct = (req, res) => {
     const product = new productModel(req.body);
 
-    product.save()
+    product.save(function(error) {
+        assert.equal(error.errors['price'].message,
+        'Must be greater than 0');
+    })
     .then((newProduct) => {
         res.json({
             message: "The product was created successfully.",
@@ -86,6 +92,7 @@ exports.createProduct = (req, res) => {
     })
 }
 
+// endpoint to get all product categorie
 exports.getCategory = (req, res) => {
  productModel.find()
  .then(product => {
@@ -102,6 +109,7 @@ exports.getCategory = (req, res) => {
  })
 }
 
+// endpoint to update product by id
 exports.updateProduct = (req, res) => {
     productModel.findByIdAndUpdate(req.params.id, req.body, {new : true})
     .then(product => {
@@ -123,6 +131,7 @@ exports.updateProduct = (req, res) => {
     })
 }
 
+// endpoint to delete product by id
 exports.deleteProduct = (req, res) => {
     productModel.findByIdAndDelete(req.params.id)
     .then((product) => {
