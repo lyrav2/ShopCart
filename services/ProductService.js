@@ -75,10 +75,7 @@ exports.getProduct = (req, res) => {
 exports.createProduct = (req, res) => {
     const product = new productModel(req.body);
 
-    product.save(function(error) {
-        assert.equal(error.errors['price'].message,
-        'Must be greater than 0');
-    })
+    product.save()
     .then((newProduct) => {
         res.json({
             message: "The product was created successfully.",

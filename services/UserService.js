@@ -26,10 +26,7 @@ exports.createUser = async (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const user = new userModel(req.body);
 
-    user.save(function(error) {
-        assert.equal(error.errors['password'].message,
-        'Password has a minimum length of 6');
-    })
+    user.save()
     .then((newUser) => {
         res.json({
             message: "The user was registered successfully.",
