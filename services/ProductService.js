@@ -112,7 +112,7 @@ exports.updateProduct = (req, res) => {
     .then(product => {
         if (product) {
             res.json({
-                message: `The product, ${req.params.name}, with the id ${req.params.id} was updated.`,
+                message: `The product with the id ${req.params.id} was updated.`,
                 data: product
             })
         } else {
@@ -134,7 +134,7 @@ exports.deleteProduct = (req, res) => {
     .then((product) => {
         if (product) {
             res.json({
-                message: `The product, ${req.params.name}, with the ID ${req.params.id} was deleted.`
+                message: `The product with the ID ${req.params.id} was deleted.`
             })
         } else {
             res.status(404).json({
