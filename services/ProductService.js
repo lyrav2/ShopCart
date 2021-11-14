@@ -31,6 +31,14 @@ exports.getProducts = (req, res) => {
                 message: `Error: ${err}`
             })
         })
+    } else if (req.query.categories) {
+        productModel.find().distinct(
+            'category', function(error, categories) {
+                res.json({
+                    message: "A list of all the categories",
+                    data: categories
+                })
+            })
     }
     else {
         productModel.find()
@@ -87,23 +95,6 @@ exports.createProduct = (req, res) => {
             message: `Error: ${err}`
         })
     })
-}
-
-// endpoint to get all product categorie
-exports.getCategory = (req, res) => {
- productModel.find()
- .then(product => {
-     if (product) {
-         res.json({
-             message: `A list of all product categories`,
-             data: product.category
-         })
-     } else {
-         res.status(500).json({
-             message: `There were no applicable products.`
-         })
-     }
- })
 }
 
 // endpoint to update product by id
