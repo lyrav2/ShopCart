@@ -13,7 +13,7 @@ if (process.env.NODE_ENV!="production") {
 const app = express();
 
 const corsOptionsDelegate = function(req, callback) {
-    const allowlist = ['http://localhost:3000', 'http://127.0.0.1:3000']
+    const allowlist = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://relaxed-ritchie-40df0a.netlify.app']
     let corsOptions;
     if (allowlist.indexOf(req.header('Origin')) !== -1) {
         corsOptions = {origin: true}
